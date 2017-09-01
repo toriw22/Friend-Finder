@@ -29,7 +29,7 @@ app.post("/survey", function(req, res) {
 
 	var totalNFScore = 0;
 	
-	var friendsScores = [];
+	var friendsSorting = [];
 
 
 
@@ -39,29 +39,28 @@ app.post("/survey", function(req, res) {
 
 	};
 
+	newFriend.score = totalNFScore;
+
 	for (var i = 0; i < friends.length; i++) {
-		var sum = 0;
 		var currentFriend = friends[i];
-		for (var j = 0; j < currentFriend.scores.length; j++) {
-			sum += currentFriend.scores[j];
-
-		}
 		
-		friendsScores[i] = sum - totalNFScore;
-		friendsScores = friendsScores.sort(function(a, b){return a - b});
+		var calculatedScore = Math.abs(currentFriend.score - newFriend.score);
 		
-	}
+		var friendsObject = {score: calculatedScore, name: currentFriend.name};
+		
+		friendsSorting.push(friendsObject);
+		
+	};
+	friendsSorting = friendsSorting.sort(function(a, b){return a.score - b.score});
 
-	console.log(newFriend);
+	console.log("Your best friend is " + friendsSorting[0].name);
 
-	console.log(totalNFScore);
-
-	console.log(friendsScores);
 
 	res.json(newFriend);
 
 	friends.push(newFriend);
 
+	
 });
 
 
