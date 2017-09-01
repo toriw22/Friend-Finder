@@ -38,8 +38,9 @@ app.post("/survey", function(req, res) {
 		totalNFScore += newFriend.scores[i];
 
 		function calculateFriendScores (friendOrder) { 
-			while(friendOrder < friends.length) { 
-				friendsScores[friendOrder] += parseInt(friends[friendOrder].scores[i]);
+			while(friendOrder < friends.length) {
+				friendsScores[friendOrder] += friends[friendOrder].scores[i];
+
 				friendOrder++;
 				calculateFriendScores();
 			}
