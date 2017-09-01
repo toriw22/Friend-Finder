@@ -53,6 +53,8 @@ app.post("/survey", function(req, res) {
 
 	console.log(totalNFScore);
 
+	console.log(typeof(friendsScores[0]));
+
 	console.log(friendsScores);
 
 	res.json(newFriend);
