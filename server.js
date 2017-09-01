@@ -31,29 +31,30 @@ app.post("/survey", function(req, res) {
 	
 	var friendsScores = [];
 
-	var friendOrder = 0;
 
-	for (i = 0; i < newFriend.scores.length; i++) {
+
+	for (var i = 0; i < newFriend.scores.length; i++) {
 		newFriend.scores[i] = parseInt(newFriend.scores[i]);
 		totalNFScore += newFriend.scores[i];
 
-		function calculateFriendScores (friendOrder) { 
-			while(friendOrder < friends.length) {
-				friendsScores[friendOrder] += friends[friendOrder].scores[i];
-
-				friendOrder++;
-				calculateFriendScores();
-			}
-		};
-
-		calculateFriendScores(friendOrder);
 	};
-	
+
+	for (var i = 0; i < friends.length; i++) {
+		var sum = 0;
+		var currentFriend = friends[i];
+		for (var j = 0; j < currentFriend.scores.length; j++) {
+			sum += currentFriend.scores[j];
+
+		}
+		
+		friendsScores[i] = sum - totalNFScore;
+		friendsScores = friendsScores.sort(function(a, b){return a - b});
+		
+	}
+
 	console.log(newFriend);
 
 	console.log(totalNFScore);
-
-	console.log(typeof(friendsScores[0]));
 
 	console.log(friendsScores);
 
