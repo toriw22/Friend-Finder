@@ -26,23 +26,35 @@ app.get("/viewfriends", function(req, res){
 
 app.post("/survey", function(req, res) {
 	var newFriend = req.body;
-	for (i = 0; i < newFriend.scores.length; i++) {
-			newFriend.scores[i] = parseInt(newFriend.scores[i]);
-		}
 
+	var totalNFScore = 0;
+	
+	var friendsScores = [];
+
+	var friendOrder = 0;
+
+	for (i = 0; i < newFriend.scores.length; i++) {
+		newFriend.scores[i] = parseInt(newFriend.scores[i]);
+		totalNFScore += newFriend.scores[i];
+
+		function calculateFriendScores (friendOrder) { 
+			while(friendOrder < friends.length) { 
+				friendsScores[friendOrder] += parseInt(friends[friendOrder].scores[i]);
+				friendOrder++;
+				calculateFriendScores();
+			}
+		};
+
+		calculateFriendScores(friendOrder);
+	};
+	
 	console.log(newFriend);
 
-	
+	console.log(totalNFScore);
 
-	for (i = 0; i < friends.length; i++){
-		for(j = 0; j < friends[i].scores.length; j++){
-			var arrayDifference = Math.abs(friends[i].scores[j] - newFriend.scores[j]);
-			
+	console.log(friendsScores);
 
-			console.log(arrayDifference);
-			
-		} 
-	}
+	res.json(newFriend);
 
 	friends.push(newFriend);
 
