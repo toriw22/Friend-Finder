@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friend Finder</title>
+</head>
+<body>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="jumbotron">
+        <h1>Friend Finder Survey</h1>
+        <h3>To find your best match, answer the questions below.</h3>
+        <h4>1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, and 5 = Strongly Agree</h4>
+      </div>
+    <form>
+    	<!-- input questions -->
+    	<label><h2>Name</h2></label>
+    	<input class="form-control form-control-lg nameField" type="text" placeholder="Your Name">
+    	<label><h2>Link to Photo</h2></label>
+    	<input class="form-control form-control-lg photoField" type="text" placeholder="https://i.pinimg.com/236x/0b/49/d4/0b49d43d28c5b76d9a9dd5199b62ad95--real-life-this-my-life.jpg">
+
+    	<!-- dropdown questions -->
+    	<label><h2>Question 1</h2><h3>Your mind is always buzzing with unexplored ideas and plans.</h3></label>
+	   	<select class="form-control form-control-lg questionOne">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 2</h2><h3>Generally speaking, you rely more on your experience than your imagination.</h3></label>
+	    <select class="form-control form-control-lg questionTwo">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 3</h2><h3>You find it easy to stay relaxed and focused even when there is some pressure.</h3></label>
+	    <select class="form-control form-control-lg questionThree">
+  	    <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 4</h2><h3>You rarely do something just out of sheer curiosity.</h3></label>
+	    <select class="form-control form-control-lg questionFour">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 5</h2><h3>People can rarely upset you.</h3></label>
+	    <select class="form-control form-control-lg questionFive">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 6</h2><h3>It is often difficult for you to relate to other people’s feelings.</h3></label>
+	    <select class="form-control form-control-lg questionSix">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 7</h2><h3>In a discussion, truth should be more important than people’s sensitivities.</h3></label>
+	    <select class="form-control form-control-lg questionSeven">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 8</h2><h3>You rarely get carried away by fantasies and ideas.</h3></label>
+	    <select class="form-control form-control-lg questionEight">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 9</h2><h3>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h3></label>
+	    <select class="form-control form-control-lg questionNine">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select>
+
+	    <label><h2>Question 10</h2><h3>You feel more energetic after spending time with a group of people.</h3></label>
+	    <select class="form-control form-control-lg questionTen">
+  			<option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+		  </select><br>
+		<a class="btn btn-primary btn-lg" id="submit" role="button">Submit</a>	   
+
+	</form>
+ 	</div>
+	</div>	
+</body>
+</html>
+
+<script type="text/javascript"> 
+  $("#submit").on("click", function(event){
+    event.preventDefault();
+    var newFriend =  {
+      name: $(".nameField").val().trim(), 
+      photo: $(".photoField").val().trim(),
+      scores: [
+        $(".questionOne").val(), 
+        $(".questionTwo").val(), 
+        $(".questionThree").val(), 
+        $(".questionFour").val(), 
+        $(".questionFive").val(), 
+        $(".questionSix").val(), 
+        $(".questionSeven").val(), 
+        $(".questionEight").val(), 
+        $(".questionNine").val(), 
+        $(".questionTen").val()
+      ]
+    };
+      
+    console.log(newFriend);
+    
+    $.post("/survey", newFriend, function(data){
+        alert("Finding your best match...")
+
+    });
+  });
+</script>
